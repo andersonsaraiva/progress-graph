@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gráfico de Progresso</title>
+  <style>
+    .graph {
+      text-align: center;
+      width: 100px;
+      height: 100px;
+      line-height: 60px;
+      text-transform: uppercase;
+      font-family: sans-serif;
+      text-decoration: none;
+      font-size: 14px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      fill: transparent;
+      stroke-width: 12px;
+      stroke: #ddd;
+    }
+
+    :root {
+      --size: 255;
+    }
+
+    .graph svg.cor {
+      stroke: green;
+      stroke-dasharray: 255;
+      stroke-dashoffset: calc(var(--size) - 36.42);
+      transform: rotate(-90deg);
+      transform-origin: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="graph">
+    <svg>
+      <circle cx="50" cy="50" r="40" />
+    </svg>
+    <svg class="cor">
+      <circle cx="50" cy="50" r="40" />
+    </svg>
+    <span class="counter">1</span><span>/7</span>
+  </div>
+
+  <button id="button1">próxima</button>
+
+  <script>
+    let rosca = document.querySelector('svg.cor');
+    let root = document.documentElement;
+
+    var btn1 = document.getElementById("button1");
+    var counters = document.querySelectorAll(".counter");
+
+    var size = 36.42;
+
+    btn1.addEventListener("click", btn1Count);
+
+    function btn1Count(event) {
+      let atual = parseInt(counters[0].innerHTML);
+
+      if (atual == 7) return;
+
+      counters[0].innerHTML = atual + 1;
+      root.style.setProperty('--size', 255 + 36.42 - [size += 36.42]);
+    }
+  </script>
+</body>
+
+</html>
